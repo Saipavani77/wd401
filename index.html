@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confetti Button</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Click the button to delete confetti!</h1>
+<button id="confettibutton">Create Confetti</button>
+
+<script>
+document.getElementById('confettiButton').addEventListener('click', function() {
+  // Create a random color for the confetti
+  function randomColor() {
+    return Math.floor(Math.random() * 255);
+  }
+
+  // Create a confetti element
+  var confetti = document.createElement('div');
+  confetti.className = 'confetti';
+  confetti.style.width = '10px';
+  confetti.style.height = '10px';
+  confetti.style.backgroundColor = 'rgb(' + randomColor() + ',' + randomColor() + ',' + randomColor() + ')';
+  confetti.style.position = 'fixed';
+  confetti.style.left = Math.random() * window.innerWidth + 'px';
+  confetti.style.top = '-20px';
+  confetti.style.opacity = '1';
+  confetti.style.transition = 'top 1s ease-out, opacity 1s ease-in';
+  
+  // Append confetti to the body
+  document.body.appendChild(confetti);
+
+  // Animate confetti falling
+  setTimeout(function() {
+    confetti.style.top = window.innerHeight + 'px';
+    confetti.style.opacity = '0';
+  }, 50);
+  
+  // Remove confetti after animation ends
+  confetti.addEventListener('transitionend', function() {
+    confetti.remove();
+  });
+});
+</script>
+
+</body>
+</html>
